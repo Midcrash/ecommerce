@@ -5,11 +5,14 @@ import {
   Subtitle,
   BackgroundImage,
 } from "./menu-item.styles";
-
+import { withRouter } from "react-router-dom";
 import React from "react";
 
-const MenuItem = ({ title, imageUrl, size }) => (
-  <MenuItemStyle size={size}>
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
+  <MenuItemStyle
+    size={size}
+    onClick={() => history.push(`${match.url}${linkUrl}`)}
+  >
     <BackgroundImage style={{ backgroundImage: `url(${imageUrl})` }}>
       <Content>
         <Title className="title">{title.toUpperCase()}</Title>
@@ -19,4 +22,4 @@ const MenuItem = ({ title, imageUrl, size }) => (
   </MenuItemStyle>
 );
 
-export default MenuItem;
+export default withRouter(MenuItem);
